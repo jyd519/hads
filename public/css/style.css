@@ -125,3 +125,84 @@ rect {
     padding: 0 !important;
   }
 }
+
+#_toc {
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    width: 300px;
+    height: 100%;
+    padding-top: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: rgb(250, 250, 250);
+    background-image: initial;
+    background-position-x: initial;
+    background-position-y: initial;
+    background-size: initial;
+    background-repeat-x: initial;
+    background-repeat-y: initial;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: rgb(250, 250, 250);
+}
+
+#_toc ul {
+    padding: 0px 0px 0px 20px !important;
+    margin: 0px !important;
+    list-style: none;
+}
+#_toc li {
+    list-style: none;
+}
+
+#_toc a {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-size: 14px !important;
+  color: rgb(54, 65, 73) !important;
+  font-weight: normal !important;
+  font-style: normal !important;
+  text-transform: none !important;
+  letter-spacing: 0.2px !important;
+  display: block !important;
+  text-decoration: none !important;
+  background: none !important;
+  border-width: 0px !important;
+  border-style: initial !important;
+  border-color: initial !important;
+  border-image: initial !important;
+  padding: 5px 10px !important;
+}
+
+.markdown-body {
+  font-family: "Fira Code", "Consolas", Courier, "Lantinghei TC", monospace !important;
+}
+
+.markdown-body ul, .markdown-body ol {
+  padding-left: 1em; 
+}
+
+@media print {
+  #_toc { display: none; }
+  body {
+    padding-left: 0;
+  }
+  /* thead {
+    display: table-row-group;
+  } */
+  tr, td, th, thead, tfoot {
+    page-break-inside: avoid !important;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  body {
+    padding-left: 300px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #_toc { display: none; }
+}

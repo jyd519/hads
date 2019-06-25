@@ -220,6 +220,10 @@ app.get('*', (req, res, next) => {
     } else if (Matcher.isCode(filePath)) {
       contentPromise = renderer.renderCode(filePath);
       icon = ICONS.fileCode;
+    } else {
+      // Allow downloading other types of files
+      res.sendFile(filePath);
+      return;
     }
 
     if (!title) {
