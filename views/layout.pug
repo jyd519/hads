@@ -7,7 +7,7 @@ html
     link(rel="shortcut icon", href="/_hads/assets/favicon.ico")
     each style in styles
       link(href=`/_hads${style}`, rel='stylesheet', type='text/css')
-  body
+  body(class={'has-toc': toc})
     include header
     block content
     include footer

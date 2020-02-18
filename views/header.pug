@@ -1,10 +1,10 @@
 if !static
   .header
     .container.clearfix
-      a.header-logo-invertocat(href='/')
+      a.header-logo-invertocat(href=`${baseUrl}`)
         span.mega-octicon.octicon-book
       .header-search
-        form(method='GET', action='/')
+        form(method='GET', action=`${baseUrl}`)
           .inline-wrapper
             label.form-control.header-search-wrapper
               input.form-control.header-search-input(type='search', name='search', placeholder='Search', value=search)

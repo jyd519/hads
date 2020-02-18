@@ -24,6 +24,9 @@ const args = optimist
   .alias('h', 'host')
   .describe('h', 'Host address to bind to')
   .default('h', 'localhost')
+  .alias('b', 'basePath')
+  .describe('b', 'Public url base path')
+  .default('b', '/')
   .alias('i', 'images-dir')
   .describe('i', 'Directory to store images')
   .default('i', 'images')
@@ -41,6 +44,10 @@ const args = optimist
 if (args.help || args._.length > 1) {
   optimist.showHelp(console.log);
   process.exit(); // eslint-disable-line no-process-exit
+}
+
+if (!args.basePath) {
+  args.basePath  = '/';
 }
 
 const INDEXES = [
@@ -102,7 +109,8 @@ const STYLESHEETS = [
 
 const indexer = new Indexer(PATHS.root);
 const renderer = new Renderer(indexer, {
-  isExport: args.export
+  isExport: args.export,
+  basePath: args.basePath.substr(1)
 });
 
 if (args.export) {
@@ -243,12 +251,14 @@ app.get('*', (req, res, next) => {
           res.status(statusCode);
           res.render(edit ? 'edit' : 'file', {
             title,
+            baseUrl: args.basePath,
             lastModified,
             readonly: args.readonly,
             route,
             icon,
             search,
             content,
+            toc: content.indexOf('id="_toc">') > 0,
             styles: STYLESHEETS,
             scripts: SCRIPTS,
             pkg
@@ -365,11 +375,13 @@ if (!args.readonly) {
       })
       .then(content => res.render('file', {
         title: path.basename(filePath),
+        baseUrl: args.basePath,
         lastModified,
         readonly: args.readonly,
         route,
         icon: 'octicon-file',
         content,
+        toc: content.indexOf('id="_toc">') > 0,
         styles: STYLESHEETS,
         scripts: SCRIPTS,
         pkg
